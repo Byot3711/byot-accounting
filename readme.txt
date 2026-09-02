@@ -78,7 +78,7 @@ The plugin is independent. It does not interfere with WooCommerce, but it also d
 
 Yes, tables are created per-site in the standard multisite configuration.
 
-== Screenshots ==
+
 
 1. **Main Dashboard** – Overview with income, expenses, and net profit.
 2. **Sales Module** – Add and list issued invoices with VAT and status.
