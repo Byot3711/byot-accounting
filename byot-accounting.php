@@ -2,12 +2,13 @@
 /**
  * Plugin Name: BYOT Accounting
  * Description: Professional WooCommerce accounting: sales, expenses, purchases, and charts.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: byot
  * Text Domain: byot-accounting
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.4
+ * Requires Plugins: woocommerce
  * WC requires at least: 5.0
  */
 
@@ -15,7 +16,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('BYOT_ACC_VERSION', '1.0.0');
+define('BYOT_ACC_VERSION', '1.0.1');
 define('BYOT_ACC_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BYOT_ACC_PLUGIN_URL', plugin_dir_url(__FILE__));
 
