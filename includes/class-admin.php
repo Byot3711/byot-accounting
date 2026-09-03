@@ -63,7 +63,7 @@ class BYOT_Acc_Admin {
         }
 
         wp_enqueue_style('byot-admin-css', BYOT_ACC_PLUGIN_URL . 'assets/css/admin.css', array(), BYOT_ACC_VERSION);
-        wp_enqueue_script('chart-js', 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', array(), '4.4.1', true);
+        wp_enqueue_script('chart-js', BYOT_ACC_PLUGIN_URL . 'assets/js/vendor/chart.umd.min.js', array(), '4.4.1', true);
         wp_enqueue_script('byot-admin-js', BYOT_ACC_PLUGIN_URL . 'assets/js/admin.js', array('jquery', 'chart-js'), BYOT_ACC_VERSION, true);
 
         wp_localize_script('byot-admin-js', 'byotAjax', array(

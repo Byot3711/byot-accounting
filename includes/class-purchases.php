@@ -27,9 +27,9 @@ class BYOT_Acc_Purchases {
             wp_die(esc_html__('Securitate.', 'byot-accounting'));
         }
         global $wpdb;
-        $id = intval($_GET['delete']);
+        $id = isset($_GET['delete']) ? intval($_GET['delete']) : 0;
         $wpdb->delete($wpdb->prefix . 'byot_purchases', array('id' => $id));
-        wp_redirect(admin_url('admin.php?page=byot-purchases&deleted=1'));
+        wp_safe_redirect(admin_url('admin.php?page=byot-purchases&deleted=1'));
         exit;
     }
 
@@ -40,17 +40,17 @@ class BYOT_Acc_Purchases {
 
         global $wpdb;
         $table = $wpdb->prefix . 'byot_purchases';
-        $qty = floatval(sanitize_text_field(wp_unslash($_POST['quantity'])));
-        $unit = floatval(sanitize_text_field(wp_unslash($_POST['unit_price'])));
+        $qty = isset($_POST['quantity']) ? floatval(sanitize_text_field(wp_unslash($_POST['quantity']))) : 0;
+        $unit = isset($_POST['unit_price']) ? floatval(sanitize_text_field(wp_unslash($_POST['unit_price']))) : 0;
         $data = array(
-            'purchase_date'   => sanitize_text_field(wp_unslash($_POST['purchase_date'])),
-            'product_name'    => sanitize_text_field(wp_unslash($_POST['product_name'])),
-            'wc_product_id'   => intval($_POST['wc_product_id']),
+            'purchase_date'   => isset($_POST['purchase_date']) ? sanitize_text_field(wp_unslash($_POST['purchase_date'])) : '',
+            'product_name'    => isset($_POST['product_name']) ? sanitize_text_field(wp_unslash($_POST['product_name'])) : '',
+            'wc_product_id'   => isset($_POST['wc_product_id']) ? intval($_POST['wc_product_id']) : 0,
             'quantity'        => $qty,
             'unit_price'      => $unit,
             'total_amount'    => $qty * $unit,
-            'supplier'        => sanitize_text_field(wp_unslash($_POST['supplier'])),
-            'notes'           => sanitize_textarea_field(wp_unslash($_POST['notes'])),
+            'supplier'        => isset($_POST['supplier']) ? sanitize_text_field(wp_unslash($_POST['supplier'])) : '',
+            'notes'           => isset($_POST['notes']) ? sanitize_textarea_field(wp_unslash($_POST['notes'])) : '',
         );
         $id = isset($_POST['purchase_id']) ? intval($_POST['purchase_id']) : 0;
 
@@ -60,7 +60,7 @@ class BYOT_Acc_Purchases {
             $wpdb->insert($table, $data);
         }
 
-        wp_redirect(admin_url('admin.php?page=byot-purchases&saved=1'));
+        wp_safe_redirect(admin_url('admin.php?page=byot-purchases&saved=1'));
         exit;
     }
 
