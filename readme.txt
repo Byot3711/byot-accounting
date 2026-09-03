@@ -2,9 +2,9 @@
 Contributors: byot
 Tags: accounting, invoice, sales, purchases, expenses, finance, VAT, bookkeeping
 Requires at least: 5.8
-Tested up to: 6.5
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Complete primary accounting system for WordPress. Manage sales, purchases, expen
 * **Financial Dashboard** – Total income, expenses, purchases, and estimated net profit in real time.
 * **Transaction History** – Last 10 operations listed centrally in the Dashboard.
 * **AJAX Interface** – Quick save and delete without page reload.
-* **Security** – Nonce verification, input sanitization, capability check (`manage_options`).
+* **Security** – Nonce verification, input sanitization, capability check (`manage_woocommerce`).
 
 = Who is it for? =
 
@@ -32,11 +32,11 @@ Complete primary accounting system for WordPress. Manage sales, purchases, expen
 
 = Technical Features =
 
-* Custom database tables in WordPress (`wp_byot_sales`, `wp_byot_purchases`, `wp_byot_expenses`)
+* Custom database tables in WordPress (`wp_byot_purchases`, `wp_byot_expenses`); sales are read directly from WooCommerce orders, no separate sales table
 * Responsive design, natively integrated into the WordPress Admin style
 * OOP (Object Oriented Programming) code, structured in separate classes
 * Text domain ready for translations (`byot-accounting`)
-* No external dependencies (does not use SaaS services)
+* Chart.js (MIT License) is bundled with the plugin for the dashboard chart; no other external services are used
 
 == Installation ==
 
@@ -60,33 +60,28 @@ If the plugin does not create the tables, deactivate and reactivate it. Tables a
 
 = Why doesn't the BYOT Accounting menu appear? =
 
-Make sure you are logged in with an account that has the **Administrator** role. The plugin checks for the `manage_options` capability.
+Make sure you are logged in with an account that has the `manage_woocommerce` capability (Administrators and Shop Managers by default).
 
 = Can I export data to Excel/CSV? =
 
-In the current version (1.0.0) CSV export is not included. You can manually export tables directly from phpMyAdmin. This feature will be added in a future update.
+CSV export is not included yet. You can manually export tables directly from phpMyAdmin. This feature will be added in a future update.
 
 = Can it generate PDF invoices? =
 
-Version 1.0.0 manages financial records in digital format. PDF generation is planned for v2.0.
+The plugin currently manages financial records in digital format only. PDF generation is planned for v2.0.
 
 = Does it work with WooCommerce? =
 
-The plugin is independent. It does not interfere with WooCommerce, but it also does not automatically synchronize orders. You can manually add WooCommerce sales as sales invoices.
+WooCommerce is required and must be active; the plugin will not load its admin pages otherwise. Sales figures are read directly from your WooCommerce orders (no manual entry or separate sales table); expenses and purchases are recorded independently.
 
 = Is it multisite compatible? =
 
 Yes, tables are created per-site in the standard multisite configuration.
 
-
-
-1. **Main Dashboard** – Overview with income, expenses, and net profit.
-2. **Sales Module** – Add and list issued invoices with VAT and status.
-3. **Purchases Module** – Supplier records and received invoices.
-4. **Expenses Module** – Multiple categories and payment methods.
-5. **Edit Interface** – Quick form with AJAX save.
-
 == Changelog ==
+
+= 1.0.1 =
+* Compliance and maintenance release: security hardening (Chart.js bundled locally instead of loaded from a CDN, safe redirects, hardened input handling), full WordPress Coding Standards compliance, and confirmed compatibility up to WordPress 7.1. No user-facing feature changes.
 
 = 1.0.0 - 2024-06-12 =
 * Initial release.
@@ -98,8 +93,15 @@ Yes, tables are created per-site in the standard multisite configuration.
 
 == Upgrade Notice ==
 
+= 1.0.1 =
+Maintenance release: security hardening and WordPress Coding Standards compliance, no database or feature changes. Safe to update.
+
 = 1.0.0 =
 First stable version. Backup is recommended before activation on production sites.
+
+== Credits ==
+
+* Includes [Chart.js](https://www.chartjs.org/) (MIT License), bundled locally for the dashboard chart.
 
 == Arbitrary section ==
 
