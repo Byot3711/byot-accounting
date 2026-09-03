@@ -1,18 +1,31 @@
 <?php
-if (!defined('ABSPATH')) {
-    exit;
+/**
+ * Custom database table schema for expenses and purchases.
+ *
+ * @package BYOT_Accounting
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
+/**
+ * Creates the plugin's custom database tables.
+ */
 class BYOT_Acc_Database {
-    public static function create_tables() {
-        global $wpdb;
-        $charset_collate = $wpdb->get_charset_collate();
-        $expenses = $wpdb->prefix . 'byot_expenses';
-        $purchases = $wpdb->prefix . 'byot_purchases';
 
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+	/**
+	 * Creates (or upgrades) the byot_expenses and byot_purchases tables via dbDelta().
+	 */
+	public static function create_tables() {
+		global $wpdb;
+		$charset_collate = $wpdb->get_charset_collate();
+		$expenses        = $wpdb->prefix . 'byot_expenses';
+		$purchases       = $wpdb->prefix . 'byot_purchases';
 
-        $sql_expenses = "CREATE TABLE IF NOT EXISTS {$expenses} (
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+
+		$sql_expenses = "CREATE TABLE IF NOT EXISTS {$expenses} (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             expense_date date NOT NULL,
             category varchar(100) NOT NULL DEFAULT '',
@@ -27,7 +40,7 @@ class BYOT_Acc_Database {
             KEY category (category)
         ) {$charset_collate};";
 
-        $sql_purchases = "CREATE TABLE IF NOT EXISTS {$purchases} (
+		$sql_purchases = "CREATE TABLE IF NOT EXISTS {$purchases} (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             purchase_date date NOT NULL,
             product_name varchar(255) NOT NULL DEFAULT '',
@@ -43,7 +56,7 @@ class BYOT_Acc_Database {
             KEY wc_product_id (wc_product_id)
         ) {$charset_collate};";
 
-        dbDelta($sql_expenses);
-        dbDelta($sql_purchases);
-    }
+		dbDelta( $sql_expenses );
+		dbDelta( $sql_purchases );
+	}
 }
