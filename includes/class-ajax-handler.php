@@ -11,7 +11,7 @@ class BYOT_Acc_Ajax_Handler {
     public static function get_chart_data() {
         check_ajax_referer('byot_nonce', 'nonce');
         if (!current_user_can('manage_woocommerce')) {
-            wp_send_json_error('Unauthorized');
+            wp_send_json_error(__('Unauthorized', 'byot-accounting'));
         }
 
         $months = array();

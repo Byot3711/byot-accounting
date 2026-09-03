@@ -68,7 +68,12 @@ class BYOT_Acc_Admin {
 
         wp_localize_script('byot-admin-js', 'byotAjax', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce'   => wp_create_nonce('byot_nonce')
+            'nonce'   => wp_create_nonce('byot_nonce'),
+            'labels'  => array(
+                'sales'     => __('Vanzari', 'byot-accounting'),
+                'expenses'  => __('Cheltuieli', 'byot-accounting'),
+                'purchases' => __('Achizitii', 'byot-accounting'),
+            ),
         ));
     }
 }
