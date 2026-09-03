@@ -86,14 +86,14 @@ class BYOT_Acc_Sales {
                 <div class="tablenav">
                     <div class="tablenav-pages">
                         <?php
-                        echo paginate_links(array(
+                        echo wp_kses_post(paginate_links(array(
                             'base' => add_query_arg('paged', '%#%'),
                             'format' => '',
                             'prev_text' => __('&laquo;', 'byot-accounting'),
                             'next_text' => __('&raquo;', 'byot-accounting'),
                             'total' => $pages,
                             'current' => $current_page,
-                        ));
+                        )));
                         ?>
                     </div>
                 </div>

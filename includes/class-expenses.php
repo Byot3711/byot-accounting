@@ -27,9 +27,9 @@ class BYOT_Acc_Expenses {
             wp_die(esc_html__('Securitate verificata.', 'byot-accounting'));
         }
         global $wpdb;
-        $id = intval($_GET['delete']);
+        $id = isset($_GET['delete']) ? intval($_GET['delete']) : 0;
         $wpdb->delete($wpdb->prefix . 'byot_expenses', array('id' => $id));
-        wp_redirect(admin_url('admin.php?page=byot-expenses&deleted=1'));
+        wp_safe_redirect(admin_url('admin.php?page=byot-expenses&deleted=1'));
         exit;
     }
 
@@ -41,12 +41,12 @@ class BYOT_Acc_Expenses {
         global $wpdb;
         $table = $wpdb->prefix . 'byot_expenses';
         $data = array(
-            'expense_date'    => sanitize_text_field(wp_unslash($_POST['expense_date'])),
-            'category'        => sanitize_text_field(wp_unslash($_POST['category'])),
-            'description'     => sanitize_textarea_field(wp_unslash($_POST['description'])),
-            'amount'          => floatval(sanitize_text_field(wp_unslash($_POST['amount']))),
-            'payment_method'  => sanitize_text_field(wp_unslash($_POST['payment_method'])),
-            'supplier'        => sanitize_text_field(wp_unslash($_POST['supplier'])),
+            'expense_date'    => isset($_POST['expense_date']) ? sanitize_text_field(wp_unslash($_POST['expense_date'])) : '',
+            'category'        => isset($_POST['category']) ? sanitize_text_field(wp_unslash($_POST['category'])) : '',
+            'description'     => isset($_POST['description']) ? sanitize_textarea_field(wp_unslash($_POST['description'])) : '',
+            'amount'          => isset($_POST['amount']) ? floatval(sanitize_text_field(wp_unslash($_POST['amount']))) : 0,
+            'payment_method'  => isset($_POST['payment_method']) ? sanitize_text_field(wp_unslash($_POST['payment_method'])) : '',
+            'supplier'        => isset($_POST['supplier']) ? sanitize_text_field(wp_unslash($_POST['supplier'])) : '',
         );
         $id = isset($_POST['expense_id']) ? intval($_POST['expense_id']) : 0;
 
@@ -56,7 +56,7 @@ class BYOT_Acc_Expenses {
             $wpdb->insert($table, $data);
         }
 
-        wp_redirect(admin_url('admin.php?page=byot-expenses&saved=1'));
+        wp_safe_redirect(admin_url('admin.php?page=byot-expenses&saved=1'));
         exit;
     }
 
