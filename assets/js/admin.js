@@ -26,7 +26,7 @@
                         labels: data.labels,
                         datasets: [
                             {
-                                label: 'Vanzari',
+                                label: byotAjax.labels.sales,
                                 data: data.sales,
                                 borderColor: '#2271b1',
                                 backgroundColor: 'rgba(34,113,177,0.1)',
@@ -34,7 +34,7 @@
                                 fill: true
                             },
                             {
-                                label: 'Cheltuieli',
+                                label: byotAjax.labels.expenses,
                                 data: data.expenses,
                                 borderColor: '#b32d2e',
                                 backgroundColor: 'rgba(179,45,46,0.1)',
@@ -42,7 +42,7 @@
                                 fill: true
                             },
                             {
-                                label: 'Achizitii',
+                                label: byotAjax.labels.purchases,
                                 data: data.purchases,
                                 borderColor: '#40860d',
                                 backgroundColor: 'rgba(64,134,13,0.1)',
